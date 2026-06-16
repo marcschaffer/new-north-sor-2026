@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>State of the Region 2026 | Visuals</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: #f4f5f6;
+      color: #222;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #0C4A7C;
+      color: #fff;
+      padding: 44px 56px 36px;
+      border-bottom: 4px solid #B2BE36;
+    }
+    .header-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #B2BE36;
+      margin-bottom: 10px;
+    }
+    header h1 {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: -0.4px;
+      line-height: 1.2;
+    }
+    .header-meta {
+      margin-top: 20px;
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .header-meta span {
+      font-size: 12px;
+      opacity: 0.6;
+      border-left: 2px solid #B2BE36;
+      padding-left: 10px;
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: #0a3d68;
+      padding: 0 56px;
+      display: flex;
+      gap: 2px;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+    nav a {
+      color: #9aa8b8;
+      text-decoration: none;
+      font-size: 12.5px;
+      font-weight: 500;
+      padding: 13px 15px;
+      display: inline-block;
+      border-bottom: 3px solid transparent;
+      transition: color 0.15s, border-color 0.15s;
+      white-space: nowrap;
+    }
+    nav a:hover {
+      color: #fff;
+      border-bottom-color: #B2BE36;
+    }
+    .nav-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #4a6070;
+      padding: 14px 10px 14px 16px;
+      align-self: center;
+      white-space: nowrap;
+    }
+
+    /* ── Layout ── */
+    main {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 56px 28px 100px;
+    }
+
+    /* ── Sections ── */
+    .report-section {
+      margin-bottom: 80px;
+    }
+    .section-header {
+      margin-bottom: 32px;
+      padding-bottom: 18px;
+      border-bottom: 2px solid #e4e6e8;
+    }
+    .section-number {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #B2BE36;
+      margin-bottom: 6px;
+    }
+    .section-header h2 {
+      font-size: 24px;
+      font-weight: 700;
+      color: #0C4A7C;
+      letter-spacing: -0.3px;
+    }
+    .section-header p {
+      font-size: 13px;
+      color: #888;
+      margin-top: 5px;
+    }
+
+    /* ── Subsections ── */
+    .subsection {
+      margin-bottom: 40px;
+    }
+    .subsection h3 {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #0C4A7C;
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #dde0e3;
+    }
+
+    /* ── Chart grid ── */
+    .chart-grid {
+      display: grid;
+      gap: 20px;
+    }
+    .chart-grid.cols-1 { grid-template-columns: 1fr; }
+    .chart-grid.cols-2 { grid-template-columns: 1fr 1fr; }
+    .chart-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+    /* ── Chart card (live) ── */
+    .chart-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+    .chart-label {
+      font-size: 10.5px;
+      color: #c0c4c8;
+      padding: 10px 14px 0;
+      font-family: 'Courier New', monospace;
+    }
+    .chart-card iframe {
+      display: block;
+      width: 100%;
+      border: none;
+    }
+
+    /* ── Placeholder ── */
+    .chart-placeholder {
+      background: #fff;
+      border-radius: 8px;
+      border: 2px dashed #dde0e3;
+      padding: 44px 24px;
+      text-align: center;
+      min-height: 180px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    .placeholder-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #c8cdd3;
+    }
+    .placeholder-desc {
+      font-size: 11.5px;
+      color: #d4d8dc;
+      max-width: 260px;
+    }
+
+    /* ── Section divider ── */
+    .section-divider {
+      text-align: center;
+      margin: 56px 0 52px;
+      position: relative;
+    }
+    .section-divider::before {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; top: 50%;
+      height: 1px;
+      background: #e0e3e6;
+    }
+    .section-divider span {
+      position: relative;
+      background: #f4f5f6;
+      padding: 0 16px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #aaa;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      font-size: 12px;
+      color: #aaa;
+      padding: 40px 28px;
+      border-top: 1px solid #e4e6e8;
+      margin-top: 20px;
+    }
+    footer strong { color: #0C4A7C; }
+
+    /* ── Responsive ── */
+    @media (max-width: 860px) {
+      header { padding: 32px 24px 28px; }
+      nav { padding: 0 16px; }
+      main { padding: 32px 16px 64px; }
+      .chart-grid.cols-2,
+      .chart-grid.cols-3 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r=0;r<e.length;r++){if(e[r].contentWindow===a.source)e[r].style.height=a.data["datawrapper-height"][t]+"px"}}}))}();
+</script>
+
+<header>
+  <div class="header-eyebrow">New North, Inc.</div>
+  <h1>State of the Region 2026 | Visuals</h1>
+  <div class="header-meta">
+    <span>18-County New North Region</span>
+    <span>Data through 2025 Q3 / ACS 2024</span>
+    <span>For review — June 2026</span>
+  </div>
+</header>
+
+<nav>
+  <span class="nav-label">Context</span>
+  <a href="#exec">Executive Brief</a>
+  <a href="#macro">Macroeconomic</a>
+  <a href="#region">State of the Region</a>
+  <span class="nav-label">Sectors</span>
+  <a href="#sectors">Sector Highlights</a>
+  <span class="nav-label">Market Forces</span>
+  <a href="#workforce">Workforce</a>
+  <a href="#ai">AI &amp; Labor</a>
+  <a href="#supply">Supply Chain</a>
+  <span class="nav-label">Closing</span>
+  <a href="#advantage">Regional Advantage</a>
+  <a href="#action">What Leaders Can Do</a>
+</nav>
+
+<main>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 2 — EXECUTIVE BRIEF
+  ════════════════════════════════════════════════════ -->
+  <div class="report-section" id="exec">
+    <div class="section-header">
+      <div class="section-number">Section 2</div>
+      <h2>Executive Brief</h2>
+    </div>
+    <div class="chart-grid cols-1">
+      <div class="chart-card">
+        <div class="chart-label">WsEPV — The New North</div>
+        <iframe src="https://datawrapper.dwcdn.net/WsEPV/3/" height="420" title="The New North"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><span>Economic Context</span></div>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 3 — MACROECONOMIC
+  ════════════════════════════════════════════════════ -->
+  <div class="report-section" id="macro">
+    <div class="section-header">
+      <div class="section-number">Section 3</div>
+      <h2>Macroeconomic State of the Economy</h2>
+    </div>
+
+    <div class="subsection">
+      <div class="chart-grid cols-2">
+        <div class="chart-card">
+          <div class="chart-label">j9zo4 — U.S. Monthly Employment Change</div>
+          <iframe src="https://datawrapper.dwcdn.net/j9zo4/1/" height="420" title="U.S. Monthly Employment Change"></iframe>
+        </div>
+        <div class="chart-card">
+          <div class="chart-label">QnFS4 — CPI / Core CPI / PPI</div>
+          <iframe src="https://datawrapper.dwcdn.net/QnFS4/1/" height="540" title="Consumer and Producer Price Inflation"></iframe>
+        </div>
+        <div class="chart-card">
+          <div class="chart-label">Qd5ZU — Data Center Construction</div>
+          <iframe src="https://datawrapper.dwcdn.net/Qd5ZU/1/" height="420" title="U.S. Data Center Construction Spending"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 4 — STATE OF THE REGION
+  ════════════════════════════════════════════════════ -->
+  <div class="report-section" id="region">
+    <div class="section-header">
+      <div class="section-number">Section 4</div>
+      <h2>State of the Region</h2>
+    </div>
+
+    <div class="subsection">
+      <div class="chart-grid cols-2">
+        <div class="chart-card">
+          <div class="chart-label">0y1CX — Industry Concentration (Location Quotient)</div>
+          <iframe src="https://datawrapper.dwcdn.net/0y1CX/1/" height="480" title="Industry Concentration — New North"></iframe>
+        </div>
+        <div class="chart-card">
+          <div class="chart-label">FzY9e — Occupational Composition by Metro Area</div>
+          <iframe src="https://datawrapper.dwcdn.net/FzY9e/1/" height="480" title="Occupational Composition — New North Metro Areas"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="chart-grid cols-1">
+        <div class="chart-card">
+          <div class="chart-label">OkeKX — New North County Profile</div>
+          <iframe src="https://datawrapper.dwcdn.net/OkeKX/13/" height="680" title="New North County Profile"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><span>Sector Highlights</span></div>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 5 — SECTOR HIGHLIGHTS
+  ════════════════════════════════════════════════════ -->
+  <div class="report-section" id="sectors">
+    <div class="section-header">
+      <div class="section-number">Section 5</div>
+      <h2>Sector Highlights</h2>
+    </div>
+
+    <div class="subsection">
+      <div class="chart-grid cols-1">
+        <div class="chart-card">
+          <div class="chart-label">thp3Y — New North Employment by Industry</div>
+          <iframe src="https://datawrapper.dwcdn.net/thp3Y/5/" height="480" title="New North Employment by Industry"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="chart-grid cols-1">
+        <div class="chart-card">
+          <div class="chart-label">4F2qo — Anchor Economy Employment Multipliers</div>
+          <iframe src="https://datawrapper.dwcdn.net/4F2qo/1/" height="480" title="Anchor Economy Employment Multipliers: New North MSAs"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><span>Market Forces in Focus</span></div>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 6 — WORKFORCE AND DEMOGRAPHICS
+  ════════════════════════════════════════════════════ -->
+  <div class="report-section" id="workforce">
+    <div class="section-header">
+      <div class="section-number">Section 6</div>
+      <h2>Workforce and Demographics</h2>
+    </div>
+
+    <div class="subsection">
+      <div class="chart-grid cols-1">
+        <div class="chart-card">
+          <div class="chart-label">Lb2S3 — Cumulative Population Growth — Wisconsin Counties, 2020–2025</div>
+          <iframe src="https://datawrapper.dwcdn.net/Lb2S3/1/" height="480" title="Cumulative Population Growth — Wisconsin Counties, 2020–2025"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="chart-grid cols-1">
+        <div class="chart-card">
+          <div class="chart-label">iAUst — Population Components of Change</div>
+          <iframe src="https://datawrapper.dwcdn.net/iAUst/1/" height="480" title="Population Components of Change — New North Counties, 2024–2025"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="chart-grid cols-2">
+        <div class="chart-card">
+          <div class="chart-label">UOXQB — 65+ Population Share by County, 2040 (Projected)</div>
+          <iframe src="https://datawrapper.dwcdn.net/UOXQB/6/" height="480" title="65+ Population Share by County, 2040 (Projected)"></iframe>
+        </div>
+        <div class="chart-card">
+          <div class="chart-label">sqXB8 — Government Transfers as a Share of Personal Income, 2022</div>
+          <iframe src="https://datawrapper.dwcdn.net/sqXB8/4/" height="480" title="Government Transfers as a Share of Personal Income, 2022"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 7 — AI AND THE LABOR MARKET
+  ════════════════════════════════════════════════════ -->
+  <div class="report-section" id="ai">
+    <div class="section-header">
+      <div class="section-number">Section 7</div>
+      <h2>AI and the Labor Market</h2>
+    </div>
+
+    <div class="subsection">
+      <div class="chart-grid cols-2">
+        <div class="chart-card">
+          <div class="chart-label">hNYHi — Workers by AI Exposure Tier: New North vs. United States</div>
+          <iframe src="https://datawrapper.dwcdn.net/hNYHi/1/" height="400" title="Workers by AI Exposure Tier: New North vs. United States"></iframe>
+        </div>
+        <div class="chart-card">
+          <div class="chart-label">Dkdbn — AI Exposure Rate by Occupation Group</div>
+          <iframe src="https://datawrapper.dwcdn.net/Dkdbn/1/" height="400" title="AI Exposure Rate by Occupation Group"></iframe>
+        </div>
+      </div>
+    </div>
+    <div class="subsection">
+      <div class="chart-grid cols-1">
+        <div class="chart-card">
+          <div class="chart-label">vKZtQ — AI Exposure by Occupation Group — New North vs. United States</div>
+          <iframe src="https://datawrapper.dwcdn.net/vKZtQ/1/" height="480" title="AI Exposure by Occupation Group — New North vs. United States"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 8 — SUPPLY CHAIN CHALLENGES
+  ════════════════════════════════════════════════════ -->
+  <div class="report-section" id="supply">
+    <div class="section-header">
+      <div class="section-number">Section 8</div>
+      <h2>Supply Chain Challenges</h2>
+    </div>
+
+    <div class="subsection">
+      <div class="chart-grid cols-2">
+        <div class="chart-card">
+          <div class="chart-label">dqCD0 — WTI Crude Oil: The Iran War Shock</div>
+          <iframe src="https://datawrapper.dwcdn.net/dqCD0/3/" height="400" title="WTI Crude Oil: The Iran War Shock"></iframe>
+        </div>
+        <div class="chart-card">
+          <div class="chart-label">iLLy1 — Global Supply Chain Pressure Index: Stress Re-Escalating</div>
+          <iframe src="https://datawrapper.dwcdn.net/iLLy1/3/" height="400" title="Global Supply Chain Pressure Index: Stress Re-Escalating"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="subsection">
+      <div class="chart-grid cols-1">
+        <div class="chart-card">
+          <div class="chart-label">26V18 — PPI Price Cascade: From Raw Inputs to Final Demand (YoY % Change)</div>
+          <iframe src="https://datawrapper.dwcdn.net/26V18/2/" height="440" title="PPI Price Cascade: From Raw Inputs to Final Demand (YoY % Change)"></iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider"><span>Closing</span></div>
+
+  <!-- ═══════════════════════════════════════════════
+       SECTION 9 — THE NEW NORTH REGIONAL ADVANTAGE
+  ════════════════════════════════════════════════════ -->
+  <div class="report-section" id="advantage">
+    <div class="section-header">
+      <div class="section-number">Section 9</div>
+      <h2>The New North Regional Advantage</h2>
+    </div>
+  </div>
+
+
+</main>
+
+<footer>
+  <strong>New North, Inc.</strong> &nbsp;·&nbsp; State of the Region 2026 &nbsp;·&nbsp; For review only
+</footer>
+
+</body>
+</html>
